@@ -35,43 +35,46 @@ void GasContainer::Display() {
 
 vec2 GasContainer::Collide (Particle particle1, Particle particle2) {
   vec2 distance = particle1.GetPosition() - particle2.GetPosition();
-  std::cout << "vel2 " << particle2.GetVelocity();
+  std::cout << "vel2 " << particle1.GetVelocity();
   float dot_product = glm::dot((particle1.GetVelocity() - particle2.GetVelocity()),distance);
   std::cout << "dot Product:  " << dot_product;
-  vec2 vec = vec2(distance.x * dot_product/std::pow(glm::length(distance), 2), distance.y * dot_product/std::pow(glm::length(distance), 2));
+  vec2 vec = distance * vec2(dot_product / std::pow(glm::length(distance), 2));
   vec2 velocity = particle1.GetVelocity() - vec;
   std::cout << velocity;
   return velocity;
 }
 
 void GasContainer::AdvanceOneFrame() {
-  for (int i = 0; i < particles_.size(); i++) {
-    if (particles_.at(i).GetVelocity().x > 0.0 || particles_.at(i).GetVelocity().y > 0.0) {
+  for (Particle& particle : particles_) {
+    if (particle.GetVelocity().x > 0.0 || particle.GetVelocity().y > 0.0) {
       //colliding with horizontal wall
-      if (kSize - particles_.at(i).GetPosition().y <= particles_.at(i).GetRadius()) {
-        particles_.at(i).SetVelocity(vec2(particles_.at(i).GetVelocity().x, - particles_.at(i).GetVelocity().y));
+      if (kSize - particle.GetPosition().y <= particle.GetRadius()) {
+        particle.SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
       }
       //colliding with vertical wall
-      if (kSize - particles_.at(i).GetPosition().x <= particles_.at(i).GetRadius()) {
-        particles_.at(i).SetVelocity(vec2(-particles_.at(i).GetVelocity().x, particles_.at(i).GetVelocity().y));
+      if (kSize - particle.GetPosition().x <= particle.GetRadius()) {
+        particle.SetVelocity(vec2(-particle.GetVelocity().x, particle.GetVelocity().y));
       }
     }
-    if (particles_.at(i).GetVelocity().x < 0.0 || particles_.at(i).GetVelocity().y < 0.0) {
-      if (particles_.at(i).GetPosition().y - 50 <= particles_.at(i).GetRadius()) {
-        particles_.at(i).SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
+    if (particle.GetVelocity().x < 0.0 || particle.GetVelocity().y < 0.0) {
+      if (particle.GetPosition().y - 50 <= particle.GetRadius()) {
+        particle.SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
       }
       //colliding with vertical wall
       if (particle.GetPosition().x - 50 <= particle.GetRadius()) {
         particle.SetVelocity(vec2(-particle.GetVelocity().x, particle.GetVelocity().y));
       }
     }
-    particles_.erase(std::remove(particles_.begin(), particles_.end(), particle), particles_.end());
     //colliding with each other
     for (Particle& particle2 : particles_) {
-      if (glm::distance(particle.GetPosition(), particle2.GetPosition()) <= 2 * particle.GetRadius()) {
-        if (glm::dot(particle.GetVelocity()-particle2.GetVelocity(), (particle.GetPosition()-particle2.GetPosition())) < 0) {
-          particle.SetVelocity(GasContainer::Collide(particle,particle2));
-          particle2.SetVelocity(GasContainer::Collide(particle2, particle));
+      if (particle2.GetPosition() != particle.GetPosition()) {
+        if (glm::distance(particle.GetPosition(), particle2.GetPosition()) <= 2 * particle.GetRadius()) {
+          if (glm::dot(particle.GetVelocity()-particle2.GetVelocity(), (particle.GetPosition()-particle2.GetPosition())) < 0) {
+            vec2 velocity1 = GasContainer::Collide(particle,particle2);
+            vec2 velocity2 = GasContainer::Collide(particle2,particle);
+            particle.SetVelocity(velocity1);
+            particle2.SetVelocity(velocity2);
+          }
         }
       }
     }
@@ -79,5 +82,4 @@ void GasContainer::AdvanceOneFrame() {
     particle.SetPosition(particle.GetPosition()+particle.GetVelocity());
   }
 }
-
 }  // namespace idealgas
