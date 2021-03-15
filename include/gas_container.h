@@ -35,7 +35,7 @@ class GasContainer {
   std::vector<Particle> particles_;
   int kSize;
   vec2 Collide(Particle particle1, Particle particle2);
-  int kStartingPoint = 5;
+  int kMargin = 5;
 };
 
 }  // namespace idealgas
