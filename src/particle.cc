@@ -11,19 +11,19 @@ Particle::Particle(vec2 position, vec2 velocity, int radius, std::string color) 
   Particle::color_ = color;
 }
 
-std::string Particle::GetColor() {
+std::string& Particle::GetColor() {
   return Particle::color_;
 }
 
-int Particle::GetRadius() {
+int& Particle::GetRadius() {
   return Particle::radius_;
 }
 
-vec2 Particle::GetPosition() {
+vec2& Particle::GetPosition() {
   return Particle::position_;
 }
 
-vec2 Particle::GetVelocity() {
+vec2& Particle::GetVelocity() {
   return Particle::velocity_;
 }
 

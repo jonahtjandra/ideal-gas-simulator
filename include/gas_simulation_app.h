@@ -22,7 +22,7 @@ class IdealGasApp : public ci::app::App {
   const int kMargin = 100;
 
  private:
-  GasContainer container_ = GasContainer(10, 1, 6, "blue");
+  GasContainer container_ = GasContainer(25, 1, 6, "blue");
 };
 
 }  // namespace idealgas

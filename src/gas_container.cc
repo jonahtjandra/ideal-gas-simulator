@@ -32,15 +32,17 @@ void GasContainer::Display() {
 }
 
 vec2 GasContainer::Collide (Particle particle1, Particle particle2) {
-  return (particle1.GetVelocity() -
-          ((glm::dot(particle1.GetVelocity() - particle2.GetVelocity(),
-                                               (particle1.GetPosition() - particle2.GetPosition())))
-           /(glm::length(particle1.GetPosition() - particle2.GetPosition())) *
+  vec2 velocity = (particle1.GetVelocity() -
+      (static_cast<float>(glm::dot(particle1.GetVelocity() - particle2.GetVelocity(),
+                                               (particle1.GetPosition() - particle2.GetPosition()))
+           /std::pow((glm::length(particle1.GetPosition() - particle2.GetPosition())), 2)) *
 (particle1.GetPosition() - particle2.GetPosition())));
+  return velocity;
 }
 
 void GasContainer::AdvanceOneFrame() {
-  int count = 0;
+  int count = 1;
+  std::vector<Particle>& particles_ref = particles_;
   for (Particle &particle : particles_) {
     //colliding with horizontal wall
     if (particle.GetPosition().y <= 50 || particle.GetPosition().y >= 700) {
@@ -51,13 +53,24 @@ void GasContainer::AdvanceOneFrame() {
       particle.SetVelocity(-vec2(particle.GetVelocity().x, particle.GetVelocity().y));
     }
     //colliding with each other
-    if (glm::distance2(particle.GetPosition(), particles_.at(count).GetPosition())
-        <= particle.GetRadius()) {
-      particle.SetVelocity(GasContainer::Collide(particle,particles_.at(count)));
-      particles_.at(count).SetVelocity(GasContainer::Collide(particles_.at(count), particle));
+    if (glm::dot((particle.GetVelocity()-particles_.at(count).GetVelocity()), (particle.GetPosition()-particles_.at(count).GetPosition())) < 0) {
+      if (glm::distance(particle.GetPosition(), particles_.at(count).GetPosition())
+          <= particle.GetRadius()) {
+        std::cout << particles_ref.at(count).GetVelocity();
+        std::cout << " before || after ";
+        std::cout << GasContainer::Collide(particles_.at(count), particle);
+        std::cout << " |||| ";
+        std::cout << particle.GetVelocity();
+        std::cout << " before || after ";
+        std::cout << GasContainer::Collide(particle,particles_.at(count));
+        particle.SetVelocity(GasContainer::Collide(particle,particles_.at(count)));
+        particles_ref.at(count).SetVelocity(GasContainer::Collide(particles_.at(count), particle));
+      }
     }
     particle.SetPosition(particle.GetPosition()+particle.GetVelocity());
-    count++;
+    if (count < particles_.size() - 1) {
+      count++;
+    }
   }
 }
 
