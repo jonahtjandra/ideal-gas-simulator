@@ -23,7 +23,7 @@ void GasContainer::SortParticles(std::vector<Particle> &particles) {
 
 void GasContainer::Display() {
   ci::gl::color(ci::Color("blue"));
-  ci::gl::drawSolidCircle(vec2(700,50), 5);
+  ci::gl::drawSolidCircle(vec2(696,696), 5);
   for (Particle &particle : particles_) {
     ci::gl::color(ci::Color("blue"));
     ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetRadius());
@@ -43,7 +43,7 @@ vec2 GasContainer::Collide (Particle particle1, Particle particle2) {
 
 void GasContainer::AdvanceOneFrame() {
   for (Particle &particle : particles_) {
-    if (particle.GetVelocity().x > 0 || particle.GetVelocity().y > 0) {
+    if (particle.GetVelocity().x > 0.0 || particle.GetVelocity().y > 0.0) {
       //colliding with horizontal wall
       if (700 - particle.GetPosition().y <= particle.GetRadius()) {
         particle.SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
@@ -53,12 +53,12 @@ void GasContainer::AdvanceOneFrame() {
         particle.SetVelocity(vec2(-particle.GetVelocity().x, particle.GetVelocity().y));
       }
     }
-    if (particle.GetVelocity().x < 0 || particle.GetVelocity().y < 0) {
-      if (50 - particle.GetPosition().y <= particle.GetRadius()) {
+    if (particle.GetVelocity().x < 0.0 || particle.GetVelocity().y < 0.0) {
+      if (particle.GetPosition().y - 50 <= particle.GetRadius()) {
         particle.SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
       }
       //colliding with vertical wall
-      if (50 - particle.GetPosition().y <= particle.GetRadius()) {
+      if (particle.GetPosition().x - 50 <= particle.GetRadius()) {
         particle.SetVelocity(vec2(-particle.GetVelocity().x, particle.GetVelocity().y));
       }
     }
