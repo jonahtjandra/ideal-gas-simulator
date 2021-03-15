@@ -13,10 +13,10 @@ namespace idealgas {
  */
 class GasContainer {
  public:
-  /**
-   * TODO: Add more parameters to this constructor, and add documentation.
-   */
-  GasContainer(int number_of_particles_, int velocity, int radius, std::string color);
+
+  GasContainer(int number_of_particles_, int velocity, int radius, ci::Color color, const int size);
+
+  GasContainer(vec2 particle_1, vec2 particle_2, vec2 velocity_1, vec2 velocity_2, const int size);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -29,10 +29,11 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
+  std::vector<Particle> GetParticles();
+
  private:
   std::vector<Particle> particles_;
-  const int kSize = 700;
-  void SortParticles(std::vector<Particle> &particles);
+  int kSize;
   vec2 Collide(Particle particle1, Particle particle2);
 };
 
