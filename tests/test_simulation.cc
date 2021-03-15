@@ -17,18 +17,20 @@ TEST_CASE("Colliding") {
     GasContainer container = GasContainer(vec2(20,20),
                                           vec2(21.4, 21.4),
                                           vec2(0.1, 0),
-                                          vec2(-0.1, 0), 40);
+                                          vec2(-0.1, 0), 40, 1);
     container.AdvanceOneFrame();
     REQUIRE(compare_float(glm::length(container.GetParticles().at(1).GetVelocity()), 0.1f));
+    container.GetParticles().empty();
   }
 
-  SECTION("Colliding with a wall") {
-    GasContainer container = GasContainer(vec2(39.9,20),
+  SECTION("Colliding with a vertical wall") {
+
+    GasContainer container = GasContainer(vec2(39.1,20),
                                           vec2(21.4, 21.4),
                                           vec2(0.1, 0),
-                                          vec2(-0.1, 0), 40);
+                                          vec2(-0.1, 0), 40, 1);
     container.AdvanceOneFrame();
-    REQUIRE(compare_float(glm::length(container.GetParticles().at(1).GetVelocity()), -0.1f));
+    REQUIRE(compare_float(container.GetParticles().at(0).GetVelocity().x, -0.1f));
   }
 
 }

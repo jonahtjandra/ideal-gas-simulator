@@ -5,9 +5,9 @@ using glm::vec2;
 
 namespace idealgas {
 
-GasContainer::GasContainer(vec2 particle_1, vec2 particle_2, vec2 velocity_1, vec2 velocity_2, const int size) {
-  particles_.push_back(Particle(particle_1, velocity_1, 1, ci::Color("red")));
-  particles_.push_back(Particle(particle_2, velocity_2, 1, ci::Color("red")));
+GasContainer::GasContainer(vec2 particle_1, vec2 particle_2, vec2 velocity_1, vec2 velocity_2, const int size, int radius) {
+  particles_.push_back(Particle(particle_1, velocity_1, radius, ci::Color("red")));
+  particles_.push_back(Particle(particle_2, velocity_2, radius, ci::Color("red")));
   GasContainer::kSize = size;
 }
 
@@ -35,12 +35,9 @@ void GasContainer::Display() {
 
 vec2 GasContainer::Collide (Particle particle1, Particle particle2) {
   vec2 distance = particle1.GetPosition() - particle2.GetPosition();
-  std::cout << "vel2 " << particle1.GetVelocity();
   float dot_product = glm::dot((particle1.GetVelocity() - particle2.GetVelocity()),distance);
-  std::cout << "dot Product:  " << dot_product;
   vec2 vec = distance * vec2(dot_product / std::pow(glm::length(distance), 2));
   vec2 velocity = particle1.GetVelocity() - vec;
-  std::cout << velocity;
   return velocity;
 }
 
@@ -48,20 +45,23 @@ void GasContainer::AdvanceOneFrame() {
   for (Particle& particle : particles_) {
     if (particle.GetVelocity().x > 0.0 || particle.GetVelocity().y > 0.0) {
       //colliding with horizontal wall
-      if (kSize - particle.GetPosition().y <= particle.GetRadius()) {
+      if (std::abs(kSize - particle.GetPosition().y) <= particle.GetRadius()) {
+        std::cout << "1" << particles_.at(0).GetVelocity();
         particle.SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
       }
       //colliding with vertical wall
-      if (kSize - particle.GetPosition().x <= particle.GetRadius()) {
+      if (std::abs(kSize - particle.GetPosition().x) <= particle.GetRadius()) {
         particle.SetVelocity(vec2(-particle.GetVelocity().x, particle.GetVelocity().y));
+        std::cout << "2" << particles_.at(0).GetVelocity();
       }
     }
     if (particle.GetVelocity().x < 0.0 || particle.GetVelocity().y < 0.0) {
-      if (particle.GetPosition().y - 50 <= particle.GetRadius()) {
+      if (std::abs(particle.GetPosition().y - 50) <= particle.GetRadius()) {
+        std::cout << "3" << particles_.at(0).GetVelocity();
         particle.SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
       }
       //colliding with vertical wall
-      if (particle.GetPosition().x - 50 <= particle.GetRadius()) {
+      if (std::abs(particle.GetPosition().x - 50) <= particle.GetRadius()) {
         particle.SetVelocity(vec2(-particle.GetVelocity().x, particle.GetVelocity().y));
       }
     }
@@ -78,8 +78,8 @@ void GasContainer::AdvanceOneFrame() {
         }
       }
     }
-    std::cout << particle.GetVelocity();
     particle.SetPosition(particle.GetPosition()+particle.GetVelocity());
   }
+  std::cout << particles_.at(0).GetVelocity();
 }
 }  // namespace idealgas
