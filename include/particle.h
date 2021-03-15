@@ -16,7 +16,7 @@ class Particle {
   int GetRadius();
   ci::Color GetColor();
 
- private :
+ private:
   vec2 position_;
   vec2 velocity_;
   int radius_;
