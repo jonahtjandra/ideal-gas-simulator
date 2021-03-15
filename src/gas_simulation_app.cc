@@ -9,7 +9,6 @@ IdealGasApp::IdealGasApp() {
 void IdealGasApp::draw() {
   ci::Color background_color("black");
   ci::gl::clear(background_color);
-
   container_.Display();
 }
 
