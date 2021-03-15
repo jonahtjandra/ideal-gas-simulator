@@ -23,7 +23,7 @@ TEST_CASE("Colliding") {
     container.GetParticles().empty();
   }
 
-  SECTION("Colliding with a vertical wall") {
+  SECTION("Colliding with right vertical wall") {
 
     GasContainer container = GasContainer(vec2(39.1,20),
                                           vec2(21.4, 21.4),
@@ -33,6 +33,25 @@ TEST_CASE("Colliding") {
     REQUIRE(compare_float(container.GetParticles().at(0).GetVelocity().x, -0.1f));
   }
 
+  SECTION("Colliding with bottom horizontal wall") {
+
+    GasContainer container = GasContainer(vec2(39.1,20),
+                                          vec2(21.4, 39.4),
+                                          vec2(0.1, 0),
+                                          vec2(-0.1, 0.1), 40, 1);
+    container.AdvanceOneFrame();
+    REQUIRE(compare_float(container.GetParticles().at(1).GetVelocity().y, -0.1f));
+  }
+
+  SECTION("Colliding with left vertical wall") {
+
+    GasContainer container = GasContainer(vec2(5.8,20),
+                                          vec2(21.4, 39.4),
+                                          vec2(-0.2, 0),
+                                          vec2(-0.1, 0.1), 40, 1);
+    container.AdvanceOneFrame();
+    REQUIRE(compare_float(container.GetParticles().at(0).GetVelocity().y, 0.2f));
+  }
 }
 
 

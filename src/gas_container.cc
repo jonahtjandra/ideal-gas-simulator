@@ -30,7 +30,7 @@ void GasContainer::Display() {
     ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetRadius());
   }
   ci::gl::color(ci::Color("white"));
-  ci::gl::drawStrokedRect(ci::Rectf(vec2(50, 50), vec2(kSize, kSize)));
+  ci::gl::drawStrokedRect(ci::Rectf(vec2(kStartingPoint, kStartingPoint), vec2(kSize, kSize)));
 }
 
 vec2 GasContainer::Collide (Particle particle1, Particle particle2) {
@@ -56,12 +56,12 @@ void GasContainer::AdvanceOneFrame() {
       }
     }
     if (particle.GetVelocity().x < 0.0 || particle.GetVelocity().y < 0.0) {
-      if (std::abs(particle.GetPosition().y - 50) <= particle.GetRadius()) {
+      if (std::abs(particle.GetPosition().y - kStartingPoint) <= particle.GetRadius()) {
         std::cout << "3" << particles_.at(0).GetVelocity();
         particle.SetVelocity(vec2(particle.GetVelocity().x, -particle.GetVelocity().y));
       }
       //colliding with vertical wall
-      if (std::abs(particle.GetPosition().x - 50) <= particle.GetRadius()) {
+      if (std::abs(particle.GetPosition().x - kStartingPoint) <= particle.GetRadius()) {
         particle.SetVelocity(vec2(-particle.GetVelocity().x, particle.GetVelocity().y));
       }
     }
