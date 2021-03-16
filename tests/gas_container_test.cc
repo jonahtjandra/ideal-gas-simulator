@@ -118,7 +118,6 @@ TEST_CASE("Edge cases") {
     GasContainer container = GasContainer(vec2(5.8, 7), vec2(20, 20),
                                           vec2(0, 0.1), vec2(-0.1, 0.1), 40, 1);
     container.AdvanceOneFrame();
-    std::cout << container.GetParticles().at(0).GetVelocity();
     REQUIRE(
         compare_float(container.GetParticles().at(0).GetVelocity().x, 0.0f));
   }
@@ -126,7 +125,6 @@ TEST_CASE("Edge cases") {
     GasContainer container = GasContainer(vec2(9, 5), vec2(20, 20), vec2(0, 0),
                                           vec2(-0.1, 0.1), 40, 1);
     container.AdvanceOneFrame();
-    std::cout << container.GetParticles().at(0).GetVelocity();
     REQUIRE(
         compare_float(container.GetParticles().at(0).GetVelocity().y, 0.0f));
   }

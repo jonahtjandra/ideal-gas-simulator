@@ -56,16 +56,34 @@ class GasContainer {
   std::vector<Particle> GetParticles();
 
  private:
+  //vector representation of particles in the simulator
   std::vector<Particle> particles_;
+  //size of the container
   int kSize;
   /**
    * Helper method used to return the velocities of particles at impact
-   * @param particle1 The first particle object
-   * @param particle2 The second particle object
+   * @param particle_1 The first particle object
+   * @param particle_2 The second particle object
    * @return the vec2 representation of particle 1's velocity
    */
-  vec2 ComputeVelocity(Particle particle1, Particle particle2);
+  vec2 ComputeVelocity(Particle particle_1, Particle particle_2);
+
+  /**
+   * Helper method used to handle wall collisions.
+   * @param particle the particle that is being handled for wall collisions
+   */
+  void ComputeCollisionWall(Particle& particle);
+
+  /**
+   * Helper method used to handle particle to particle collisions.
+   * @param particle_1 The first particle object in the collision
+   * @param particle_2 The second particle object in the collision
+   */
+  void ComputeCollisionParticle(Particle& particle_1, Particle& particle_2);
+  //margin for drawing the container
   int kMargin = 5;
+  //starting location of particles
+  int kStartLocation = kMargin * 3;
 };
 
 }  // namespace idealgas

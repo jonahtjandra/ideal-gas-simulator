@@ -18,10 +18,10 @@ class IdealGasApp : public ci::app::App {
   void update() override;
 
   // provided that you can see the entire UI on your screen.
-  const int kWindowSize = 660;
+  const int kWindowSize = 610;
 
  private:
-  GasContainer container_ = GasContainer(100, 1, 6, ci::Color("green"),650);
+  GasContainer container_ = GasContainer(100, 1, 6, ci::Color("green"),600);
 };
 
 }  // namespace idealgas
