@@ -1,4 +1,6 @@
 #include "gas_simulation_app.h"
+#include <iostream>
+
 
 namespace idealgas {
 
@@ -12,8 +14,21 @@ void IdealGasApp::draw() {
   container_.Display();
 }
 
+void IdealGasApp::keyDown(cinder::app::KeyEvent event) {
+  if( event.getChar() == 'w' ) {
+    // increase speed
+    IdealGasApp::simulation_speed_++;
+  }
+  if( event.getChar() == 's' ) {
+    // decrease speed
+    IdealGasApp::simulation_speed_--;
+  }
+}
+
 void IdealGasApp::update() {
-  container_.AdvanceOneFrame();
+  for (int i = 0; i < IdealGasApp::simulation_speed_; i++) {
+    container_.AdvanceOneFrame();
+  }
 }
 
 }  // namespace idealgas
