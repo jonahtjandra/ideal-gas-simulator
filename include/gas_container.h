@@ -3,7 +3,6 @@
 #include "cinder/gl/gl.h"
 #include "particle.h"
 
-using glm::vec2;
 
 namespace idealgas {
 
@@ -23,7 +22,7 @@ class GasContainer {
    * @param size the size of the particles
    */
   GasContainer(int number_of_particles_, int velocity, int radius,
-               ci::Color color, const int size);
+               const ci::Color& color, const int size);
 
   /**
    * Constructor for GasContainer class used for testing. This initializes the
@@ -35,8 +34,8 @@ class GasContainer {
    * @param size The size of the particle
    * @param radius The radius of the particle
    */
-  GasContainer(vec2 position_1, vec2 position_2, vec2 velocity_1,
-               vec2 velocity_2, const int size, int radius);
+  GasContainer(const vec2& position_1, const vec2& position_2, const vec2& velocity_1,
+               const vec2& velocity_2, const int size, int radius);
 
   /**
    * Displays the container walls and the current positions of the particles.
