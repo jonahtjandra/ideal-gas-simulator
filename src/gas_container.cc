@@ -99,7 +99,6 @@ void GasContainer::ComputeCollisionParticle(Particle& particle_1, Particle& part
   }
 }
 
-//TODO: modularize further
 void GasContainer::AdvanceOneFrame() {
   for (Particle& particle_1 : particles_) {
     ComputeCollisionWall(particle_1);
