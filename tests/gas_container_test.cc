@@ -16,7 +16,7 @@ bool compare_float(float x, float y, float epsilon = 0.0001f) {
 
 TEST_CASE("Constructor") {
   SECTION("Test GetParticles") {
-    GasContainer container = GasContainer(88, 1, 6, ci::Color("green"),600);
+    GasContainer container = GasContainer(88, 1, 6, ci::Color("green"), 600);
     REQUIRE(container.GetParticles().size() == 88);
   }
 }
@@ -58,9 +58,12 @@ TEST_CASE("Colliding") {
     GasContainer container = GasContainer(vec2(20, 20), vec2(21.4, 21.4),
                                           vec2(0, 0.21), vec2(0, -0.03), 40, 1);
     container.AdvanceOneFrame();
-    REQUIRE((compare_float(
-        glm::length(container.GetParticles().at(0).GetVelocity()), 0.15f) && (compare_float(
-        glm::length(container.GetParticles().at(1).GetVelocity()), 0.15f))));
+    REQUIRE((
+        compare_float(glm::length(container.GetParticles().at(0).GetVelocity()),
+                      0.15f) &&
+        (compare_float(
+            glm::length(container.GetParticles().at(1).GetVelocity()),
+            0.15f))));
   }
 
   SECTION("Colliding with right vertical wall") {

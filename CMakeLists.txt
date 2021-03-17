@@ -71,6 +71,7 @@ ci_make_app(
         LIBRARIES       catch2
 )
 
+
 if(MSVC)
     set_property(TARGET gas-simulation-test APPEND_STRING PROPERTY LINK_FLAGS " /SUBSYSTEM:CONSOLE")
 endif()

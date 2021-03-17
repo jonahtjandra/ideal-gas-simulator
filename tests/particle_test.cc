@@ -1,4 +1,3 @@
-#include <gas_container.h>
 #include <particle.h>
 
 #include <catch2/catch.hpp>
