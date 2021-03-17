@@ -53,7 +53,8 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/gas_simulation_app.cc
                             src/particle.cc)
 
-list(APPEND TEST_FILES tests/gas_container_test.cc)
+list(APPEND TEST_FILES      tests/gas_container_test.cc
+                            tests/particle_test.cc)
 
 ci_make_app(
         APP_NAME        gas-simulation

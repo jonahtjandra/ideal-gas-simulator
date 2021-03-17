@@ -4,7 +4,7 @@ using glm::vec2;
 
 namespace idealgas {
 
-Particle::Particle(vec2 position, vec2 velocity, int radius, ci::Color color) {
+Particle::Particle(vec2 position, vec2 velocity, size_t radius, ci::Color color) {
   Particle::position_ = position;
   Particle::velocity_ = velocity;
   Particle::radius_ = radius;

@@ -15,7 +15,7 @@ class Particle {
    * @param radius the radius of the particle
    * @param color the color of the particle
    */
-  Particle(vec2 position, vec2 velocity, int radius, ci::Color color);
+  Particle(vec2 position, vec2 velocity, size_t radius, ci::Color color);
 
   /**
    * getter for position_ of particle.
@@ -55,7 +55,7 @@ class Particle {
  private:
   vec2 position_;
   vec2 velocity_;
-  int radius_;
+  size_t radius_;
   ci::Color color_;
 };
 }  // namespace idealgas

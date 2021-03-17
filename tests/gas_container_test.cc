@@ -8,9 +8,16 @@ using idealgas::GasContainer;
 
 // https://www.tutorialspoint.com/floating-point-comparison-in-cplusplus
 bool compare_float(float x, float y, float epsilon = 0.0001f) {
-  if (fabs(x - y) < epsilon)
+  if (fabs(x - y) < epsilon) {
     return true;  // they are same
-  return false;   // they are not same
+  }
+  return false;  // they are not same
+}
+
+TEST_CASE("Constructor") {
+  SECTION("Test GetParticles") {
+
+  }
 }
 
 TEST_CASE("Colliding") {
@@ -18,44 +25,41 @@ TEST_CASE("Colliding") {
     GasContainer container = GasContainer(vec2(20, 20), vec2(21.4, 21.4),
                                           vec2(0.1, 0), vec2(-0.1, 0), 40, 1);
     container.AdvanceOneFrame();
-    REQUIRE(
-        compare_float((container.GetParticles().at(0).GetVelocity().y), -0.1f));
-    REQUIRE(
-        compare_float((container.GetParticles().at(1).GetVelocity().y), 0.1f));
-    container.GetParticles().empty();
+    REQUIRE((compare_float((container.GetParticles().at(0).GetVelocity().y),
+                           -0.1f) &&
+             (compare_float((container.GetParticles().at(1).GetVelocity().y),
+                            0.1f))));
   }
 
   SECTION("Colliding horizontally with each other at different speed") {
     GasContainer container = GasContainer(vec2(20, 20), vec2(21.4, 21.4),
                                           vec2(0.18, 0), vec2(-0.12, 0), 40, 1);
     container.AdvanceOneFrame();
-    REQUIRE(compare_float(
-        glm::length(container.GetParticles().at(0).GetVelocity()), 0.15297f));
-    REQUIRE(compare_float(
-        glm::length(container.GetParticles().at(1).GetVelocity()), 0.15297f));
-    container.GetParticles().empty();
+    REQUIRE((
+        compare_float(glm::length(container.GetParticles().at(0).GetVelocity()),
+                      0.15297f) &&
+        (compare_float(
+            glm::length(container.GetParticles().at(1).GetVelocity()),
+            0.15297f))));
   }
 
   SECTION("Colliding vertically with each other at the same speed") {
     GasContainer container = GasContainer(vec2(20, 20), vec2(21.4, 21.4),
                                           vec2(0, 0.1), vec2(0, -0.1), 40, 1);
     container.AdvanceOneFrame();
-    REQUIRE(
-        compare_float((container.GetParticles().at(0).GetVelocity().x), -0.1f));
-    REQUIRE(
-        compare_float((container.GetParticles().at(1).GetVelocity().x), 0.1f));
-    container.GetParticles().empty();
+    REQUIRE((compare_float((container.GetParticles().at(0).GetVelocity().x),
+                           -0.1f) &&
+             (compare_float((container.GetParticles().at(1).GetVelocity().x),
+                            0.1f))));
   }
 
   SECTION("Colliding vertically with each other at different speed") {
     GasContainer container = GasContainer(vec2(20, 20), vec2(21.4, 21.4),
                                           vec2(0, 0.21), vec2(0, -0.03), 40, 1);
     container.AdvanceOneFrame();
-    REQUIRE(compare_float(
-        glm::length(container.GetParticles().at(0).GetVelocity()), 0.15f));
-    REQUIRE(compare_float(
-        glm::length(container.GetParticles().at(1).GetVelocity()), 0.15f));
-    container.GetParticles().empty();
+    REQUIRE((compare_float(
+        glm::length(container.GetParticles().at(0).GetVelocity()), 0.15f) && (compare_float(
+        glm::length(container.GetParticles().at(1).GetVelocity()), 0.15f))));
   }
 
   SECTION("Colliding with right vertical wall") {
@@ -96,6 +100,13 @@ TEST_CASE("Colliding") {
     container.AdvanceOneFrame();
     REQUIRE(
         compare_float(container.GetParticles().at(1).GetVelocity().y, 0.1f));
+  }
+  SECTION("Particle colliding with stationary particle") {
+    GasContainer container =
+        GasContainer(vec2(7, 7), vec2(8, 8), vec2(1, 0), vec2(0, 0), 40, 1);
+    container.AdvanceOneFrame();
+    REQUIRE(
+        compare_float(container.GetParticles().at(1).GetVelocity().y, 0.5f));
   }
 }
 TEST_CASE("Edge cases") {

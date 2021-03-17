@@ -15,14 +15,14 @@ class GasContainer {
   /**
    * Constructor for GasContainer class. This class handles the physics and
    * dynamics of the simulation.
-   * @param number_of_particles_ the number of particles simulated
-   * @param velocity the initial velocities of the particle
+   * @param number_of_particles the number of particles simulated
+   * @param speed the initial velocities of the particle
    * @param radius the radius of the particles
    * @param color the color of the particles
    * @param size the size of the particles
    */
-  GasContainer(int number_of_particles_, int velocity, int radius,
-               const ci::Color& color, const int size);
+  GasContainer(int number_of_particles, int speed, size_t radius,
+               const ci::Color& color, const size_t size);
 
   /**
    * Constructor for GasContainer class used for testing. This initializes the
@@ -35,7 +35,7 @@ class GasContainer {
    * @param radius The radius of the particle
    */
   GasContainer(const vec2& position_1, const vec2& position_2, const vec2& velocity_1,
-               const vec2& velocity_2, const int size, int radius);
+               const vec2& velocity_2, const size_t size, size_t radius);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -58,7 +58,7 @@ class GasContainer {
   //vector representation of particles in the simulator
   std::vector<Particle> particles_;
   //size of the container
-  int kSize;
+  size_t kSize;
   /**
    * Helper method used to return the velocities of particles at impact
    * @param particle_1 The first particle object
