@@ -16,7 +16,8 @@ bool compare_float(float x, float y, float epsilon = 0.0001f) {
 
 TEST_CASE("Constructor") {
   SECTION("Test GetParticles") {
-
+    GasContainer container = GasContainer(88, 1, 6, ci::Color("green"),600);
+    REQUIRE(container.GetParticles().size() == 88);
   }
 }
 
@@ -109,7 +110,7 @@ TEST_CASE("Colliding") {
         compare_float(container.GetParticles().at(1).GetVelocity().y, 0.5f));
   }
 }
-TEST_CASE("Edge cases") {
+TEST_CASE("Edge cases for collisions") {
   SECTION("Particle overlapping but moving in the same direction") {
     GasContainer container = GasContainer(
         vec2(7, 7), vec2(7, 7), vec2(-0.1, 0.1), vec2(-0.1, 0.1), 40, 1);
