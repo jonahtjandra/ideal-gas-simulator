@@ -15,6 +15,7 @@ void IdealGasApp::draw() {
   ci::Color background_color("black");
   ci::gl::clear(background_color);
   container_.Display();
+  histogram_.Display();
 }
 
 void IdealGasApp::keyDown(cinder::app::KeyEvent event) {
@@ -31,6 +32,8 @@ void IdealGasApp::keyDown(cinder::app::KeyEvent event) {
 void IdealGasApp::update() {
   for (int i = 0; i < IdealGasApp::simulation_speed_; i++) {
     container_.AdvanceOneFrame();
+    histogram_.UpdateParticles(container_.GetParticles());
+    histogram_.AdvanceOneFrame();
   }
 }
 

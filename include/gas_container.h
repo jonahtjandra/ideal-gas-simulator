@@ -65,9 +65,9 @@ class GasContainer {
   //size of the container
   double_t kSize;
   //margin for drawing the container
-  int kMargin = 5;
+  int kMargin = 150;
   //starting location of particles
-  int kStartLocation = kMargin * 5;
+  int kStartLocation = kMargin + 30;
   /**
    * Helper method used to return the velocities of particles at impact
    * @param particle_1 The first particle object

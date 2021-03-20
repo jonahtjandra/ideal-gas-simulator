@@ -4,6 +4,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "gas_container.h"
+#include "speed_histogram.h"
 
 namespace idealgas {
 
@@ -31,11 +32,12 @@ class IdealGasApp : public ci::app::App {
   void keyDown(cinder::app::KeyEvent event) override;
 
   // provided that you can see the entire UI on your screen.
-  const int kWindowSize = 610;
+  const int kWindowSize = 750;
 
  private:
   //add comments
   GasContainer container_ = GasContainer(600);
+  SpeedHistogram histogram_ = SpeedHistogram(container_.GetParticles(), 100, ci::Color("blue"), 10);
   //set speed of simulation
   int simulation_speed_ = 1;
 };
