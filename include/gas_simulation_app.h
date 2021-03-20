@@ -34,7 +34,8 @@ class IdealGasApp : public ci::app::App {
   const int kWindowSize = 610;
 
  private:
-  GasContainer container_ = GasContainer(100, 1, 6, ci::Color("green"),600);
+  //add comments
+  GasContainer container_ = GasContainer(600);
   //set speed of simulation
   int simulation_speed_ = 1;
 };

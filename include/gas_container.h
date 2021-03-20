@@ -21,8 +21,7 @@ class GasContainer {
    * @param color the color of the particles
    * @param size the size of the particles
    */
-  GasContainer(int number_of_particles, int speed, size_t radius,
-               const ci::Color& color, const size_t size);
+  GasContainer(const size_t size);
 
   /**
    * Constructor for GasContainer class used for testing. This initializes the
@@ -35,7 +34,13 @@ class GasContainer {
    * @param radius The radius of the particle
    */
   GasContainer(const vec2& position_1, const vec2& position_2, const vec2& velocity_1,
-               const vec2& velocity_2, const size_t size, size_t radius);
+               const vec2& velocity_2, const size_t size, double_t mass_1, double_t mass_2, double_t radius);
+
+  /**
+   *
+   */
+  void AddParticles(int number_of_particles, double speed, double_t radius, double_t mass,
+                    const ci::Color& color);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -58,7 +63,11 @@ class GasContainer {
   //vector representation of particles in the simulator
   std::vector<Particle> particles_;
   //size of the container
-  size_t kSize;
+  double_t kSize;
+  //margin for drawing the container
+  int kMargin = 5;
+  //starting location of particles
+  int kStartLocation = kMargin * 5;
   /**
    * Helper method used to return the velocities of particles at impact
    * @param particle_1 The first particle object
@@ -79,10 +88,6 @@ class GasContainer {
    * @param particle_2 The second particle object in the collision
    */
   void ComputeCollisionParticle(Particle& particle_1, Particle& particle_2);
-  //margin for drawing the container
-  int kMargin = 5;
-  //starting location of particles
-  int kStartLocation = kMargin * 3;
 };
 
 }  // namespace idealgas

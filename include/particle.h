@@ -15,13 +15,13 @@ class Particle {
    * @param radius the radius of the particle
    * @param color the color of the particle
    */
-  Particle(vec2 position, vec2 velocity, size_t radius, ci::Color color);
+  Particle(vec2 position, vec2 velocity, double_t radius, double_t mass, ci::Color color);
 
   /**
    * getter for position_ of particle.
    * @return the position vector of the particle
    */
-  vec2 GetPosition();
+  vec2 GetPosition() const;
 
   /**
    * getter for velocity_ of particle.
@@ -44,18 +44,30 @@ class Particle {
    * Getter for radius_
    * @return the radius of the particle
    */
-  int GetRadius();
+  int GetRadius() const;
 
   /**
    * Getter for color_
    * @return the color of the particle
    */
-  ci::Color GetColor();
+  ci::Color GetColor() const;
+
+  /**
+   * Getter for mass_
+   * @return the masse of the particle
+   */
+  int GetMass();
+
+  /**
+   * Setter for mass
+   */
+  void SetMass(double_t mass);
 
  private:
   vec2 position_;
   vec2 velocity_;
-  size_t radius_;
+  double_t radius_;
   ci::Color color_;
+  double_t mass_;
 };
 }  // namespace idealgas

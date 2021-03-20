@@ -6,6 +6,9 @@ namespace idealgas {
 
 IdealGasApp::IdealGasApp() {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
+  container_.AddParticles(30, 3, 4, 1, ci::Color("white"));
+  container_.AddParticles(30,2, 6, 3, ci::Color("orange"));
+  container_.AddParticles(30,1, 9, 5, ci::Color("blue"));
 }
 
 void IdealGasApp::draw() {

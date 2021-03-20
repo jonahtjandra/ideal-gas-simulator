@@ -6,7 +6,7 @@ using glm::vec2;
 
 TEST_CASE("Constructing new particles") {
   idealgas::Particle particle =
-      idealgas::Particle(vec2(10, 10), vec2(1, 1), 10, ci::Color("red"));
+      idealgas::Particle(vec2(10, 10), vec2(1, 1), 10, 1, ci::Color("red"));
   SECTION("Test GetPosition") {
     REQUIRE(
         ((particle.GetPosition().y == 10) && (particle.GetPosition().x == 10)));
