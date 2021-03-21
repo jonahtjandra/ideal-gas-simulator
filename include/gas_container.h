@@ -57,7 +57,7 @@ class GasContainer {
    * Method used to return a vector of all particles currently being simulated.
    * @return vector of all particles currently being simulated
    */
-  std::vector<Particle> GetParticles();
+  std::vector<Particle> GetParticles() const;
 
  private:
   //vector representation of particles in the simulator

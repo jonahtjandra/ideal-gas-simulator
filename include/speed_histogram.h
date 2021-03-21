@@ -8,7 +8,7 @@ namespace idealgas {
 
 class SpeedHistogram {
  public:
-  SpeedHistogram(std::vector<Particle> particles, const size_t size, const ci::Color color, const double max_speed);
+  SpeedHistogram(std::vector<Particle> particles, const size_t start_point, const ci::Color color);
   /**
    * Displays the histogram and the bins.
    */
@@ -21,11 +21,12 @@ class SpeedHistogram {
   void UpdateParticles(std::vector<Particle> particles);
 
  private:
-  double max_speed_;
+  const double max_speed_ = 5;
   std::vector<float> bin_height_;
-  const int kBins = 15;
+  const int kBins = 10;
   const size_t kMargin = 130;
-  size_t kSize;
+  size_t kSize = 100;
+  size_t kStartPoint;
   ci::Color kColor;
   std::vector<Particle> particles_;
 };

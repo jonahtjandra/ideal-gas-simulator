@@ -35,11 +35,13 @@ void GasContainer::AddParticles(int number_of_particles, double speed,
   }
 }
 
-std::vector<Particle> GasContainer::GetParticles() {
+std::vector<Particle> GasContainer::GetParticles() const {
   return particles_;
 }
 
 void GasContainer::Display() {
+  ci::gl::color(ci::Color("red"));
+  ci::gl::drawSolidCircle(vec2(20,20), 10);
   for (const Particle& particle : particles_) {
     ci::gl::color(particle.GetColor());
     ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetRadius());

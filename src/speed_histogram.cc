@@ -2,21 +2,20 @@
 
 namespace idealgas {
 
-SpeedHistogram::SpeedHistogram(std::vector<Particle> particles, const size_t size, const ci::Color color, const double max_speed) {
-  max_speed_ = max_speed;
+SpeedHistogram::SpeedHistogram(std::vector<Particle> particles, const size_t start_point, const ci::Color color) {
   particles_ = particles;
-  kSize = size;
+  kStartPoint = start_point;
   kColor = color;
-}
 
-void SpeedHistogram::UpdateParticles(std::vector<Particle> particles) {
-  particles_ = particles;
 }
 
 void SpeedHistogram::Display() {
+  ci::gl::color(ci::Color("white"));
+  ci::gl::drawStrokedRect(ci::Rectf(vec2(kStartPoint, kMargin), vec2(kStartPoint + kSize, kMargin)));
+  ci::gl::drawStrokedRect(ci::Rectf(vec2(kStartPoint, kMargin), vec2(kStartPoint, kMargin - kSize)));
   for (int i = 0; i < kBins; i++) {
-    ci::gl::color(ci::Color("white"));
-    ci::gl::drawSolidRect(ci::Rectf(vec2(kMargin + (kSize * i/kBins), kMargin), vec2(kMargin + (kSize * i/kBins) + (kSize/kBins), ((1 - bin_height_.at(i)) * kMargin))));
+    ci::gl::color(ci::Color(kColor));
+    ci::gl::drawSolidRect(ci::Rectf(vec2(kStartPoint + (kSize * i/kBins), kMargin), vec2(kStartPoint + (kSize * i/kBins) + (kSize/kBins), ((1 - bin_height_.at(i)) * kMargin))));
   }
 }
 
@@ -31,7 +30,7 @@ void SpeedHistogram::AdvanceOneFrame() {
         count++;
       }
     }
-    bin_height_.push_back(static_cast<float>(count)/static_cast<float>(particles_.size()));
+    bin_height_.emplace_back(static_cast<float>(count)/static_cast<float>(particles_.size()));
     std::cout << bin_height_.size();
     std::cout << "||";
   }

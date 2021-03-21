@@ -35,11 +35,15 @@ class IdealGasApp : public ci::app::App {
   const int kWindowSize = 750;
 
  private:
+  void CreateHistogram(const GasContainer container_);
   //add comments
   GasContainer container_ = GasContainer(600);
-  SpeedHistogram histogram_ = SpeedHistogram(container_.GetParticles(), 100, ci::Color("blue"), 10);
+  std::vector<SpeedHistogram> histograms_;
   //set speed of simulation
   int simulation_speed_ = 1;
+  ci::Color particle_color_1 = ci::Color("white");
+  ci::Color particle_color_2 = ci::Color("orange");
+  ci::Color particle_color_3 = ci::Color("blue");
 };
 
 }  // namespace idealgas
