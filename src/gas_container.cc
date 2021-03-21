@@ -49,7 +49,7 @@ void GasContainer::Display() {
       ci::Rectf(vec2(kMargin, kMargin), vec2(kSize, kSize)));
 }
 
-vec2 GasContainer::ComputeVelocity(Particle particle_1, Particle particle_2) {
+vec2 GasContainer::ComputeVelocity(Particle particle_1, Particle particle_2) const {
   // using formula from
   // https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional
   float mass_ratio = float (2 * particle_2.GetMass())/(particle_1.GetMass() + particle_2.GetMass());

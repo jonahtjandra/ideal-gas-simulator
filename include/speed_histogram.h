@@ -12,13 +12,11 @@ class SpeedHistogram {
   /**
    * Displays the histogram and the bins.
    */
-  void Display();
+  void Display() const;
   /**
    * Updates the histogram
    */
   void AdvanceOneFrame();
-
-  void UpdateParticles(std::vector<Particle> particles);
 
  private:
   const double max_speed_ = 5;

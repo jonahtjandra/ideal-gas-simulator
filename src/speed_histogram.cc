@@ -10,7 +10,7 @@ SpeedHistogram::SpeedHistogram(std::vector<Particle> particles, const size_t sta
 
 }
 
-void SpeedHistogram::Display() {
+void SpeedHistogram::Display() const {
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStringCentered("Number of Particles",vec2(kStartPoint, kMargin - kSize - kTextSpacing),ci::Color("white"));
   ci::gl::drawStringCentered("Speed",vec2(kStartPoint + kSize/2, kMargin + 5),ci::Color("white"));

@@ -74,7 +74,7 @@ class GasContainer {
    * @param particle_2 The second particle object
    * @return the vec2 representation of particle 1's velocity
    */
-  vec2 ComputeVelocity(Particle particle_1, Particle particle_2);
+  vec2 ComputeVelocity(Particle particle_1, Particle particle_2) const;
 
   /**
    * Helper method used to handle wall collisions.
