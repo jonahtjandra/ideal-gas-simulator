@@ -44,6 +44,8 @@ class IdealGasApp : public ci::app::App {
   ci::Color particle_color_1 = ci::Color("white");
   ci::Color particle_color_2 = ci::Color("orange");
   ci::Color particle_color_3 = ci::Color("blue");
+  const size_t kHistogramStartingPoint = 130;
+  const size_t kHistogramSpacing = 200;
 };
 
 }  // namespace idealgas

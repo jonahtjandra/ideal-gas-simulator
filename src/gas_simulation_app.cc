@@ -24,13 +24,11 @@ void IdealGasApp::CreateHistogram(const GasContainer container) {
       particle_3.push_back(particle);
     }
   }
-  histograms_.emplace_back(particle_3, 130, particle_color_3);
-  histograms_.emplace_back(particle_2, 330, particle_color_2);
-  histograms_.emplace_back(particle_1, 530, particle_color_1);
-  std::cout << histograms_.size();
-  particle_1.clear();
-  particle_2.clear();
-  particle_3.clear();
+  histograms_.emplace_back(particle_3, kHistogramStartingPoint, particle_color_3);
+  histograms_.emplace_back(particle_2,
+                           kHistogramStartingPoint + kHistogramSpacing, particle_color_2);
+  histograms_.emplace_back(particle_1,
+      kHistogramStartingPoint + kHistogramSpacing + kHistogramSpacing, particle_color_1);
 }
 
 void IdealGasApp::draw() {

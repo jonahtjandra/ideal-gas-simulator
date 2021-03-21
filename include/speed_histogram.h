@@ -29,6 +29,7 @@ class SpeedHistogram {
   size_t kStartPoint;
   ci::Color kColor;
   std::vector<Particle> particles_;
+  const size_t kTextSpacing = 10;
 };
 
 } // namespace idealgas

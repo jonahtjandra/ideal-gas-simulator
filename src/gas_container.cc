@@ -40,8 +40,6 @@ std::vector<Particle> GasContainer::GetParticles() const {
 }
 
 void GasContainer::Display() {
-  ci::gl::color(ci::Color("red"));
-  ci::gl::drawSolidCircle(vec2(20,20), 10);
   for (const Particle& particle : particles_) {
     ci::gl::color(particle.GetColor());
     ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetRadius());
