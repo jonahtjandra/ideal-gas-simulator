@@ -85,7 +85,8 @@ TEST_CASE("Colliding") {
 
   SECTION("Colliding with left vertical wall") {
     GasContainer container = GasContainer(
-        vec2(5.8, 20), vec2(21.4, 39.4), vec2(-0.2, 0), vec2(-0.1, 0.1), 40, 1, 1, 1);
+        vec2(1, 20), vec2(21.4, 39.4),
+        vec2(-0.2, 0), vec2(-0.1, 0.1), 40, 1, 1, 1);
     container.AdvanceOneFrame();
     REQUIRE(
         compare_float(container.GetParticles().at(0).GetVelocity().x, 0.2f));
@@ -115,15 +116,14 @@ TEST_CASE("Colliding") {
   }
   SECTION("Particle colliding with different mass") {
     GasContainer container = GasContainer(vec2(20, 20), vec2(21.4, 21.4),
-                                          vec2(0.18, 0), vec2(-0.12, 0), 40, 2, 3, 1);
+                                          vec2(0.18, 0), vec2(-0.12, 0), 40, 1, 3, 1);
     container.AdvanceOneFrame();
-    std::cout << container.GetParticles().at(0).GetVelocity();
     REQUIRE((
                 compare_float(glm::length(container.GetParticles().at(0).GetVelocity()),
-                              0.1529706f) &&
+                              0.2294559f) &&
                 (compare_float(
                     glm::length(container.GetParticles().at(1).GetVelocity()),
-                    0.12f))));
+                    0.087464f))));
   }
 }
 TEST_CASE("Edge cases for collisions") {

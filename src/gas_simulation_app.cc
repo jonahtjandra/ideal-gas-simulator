@@ -55,8 +55,8 @@ void IdealGasApp::update() {
   for (int i = 0; i < IdealGasApp::simulation_speed_; i++) {
     histograms_.clear();
     container_.AdvanceOneFrame();
+    CreateHistogram(container_);
     for (SpeedHistogram& histogram : histograms_) {
-      CreateHistogram(container_);
       histogram.AdvanceOneFrame();
     }
   }
