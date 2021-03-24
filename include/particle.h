@@ -58,10 +58,6 @@ class Particle {
    */
   int GetMass();
 
-  /**
-   * Setter for mass
-   */
-  void SetMass(double_t mass);
 
  private:
   vec2 position_;

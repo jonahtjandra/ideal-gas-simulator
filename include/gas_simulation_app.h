@@ -35,7 +35,11 @@ class IdealGasApp : public ci::app::App {
   const int kWindowSize = 750;
 
  private:
-  void CreateHistogram(const GasContainer container_);
+  /**
+   * Private helper method used to instantiate a histogram from the given container
+   * @param container_ the container object of the simulation
+   */
+  void CreateHistogram(const GasContainer container);
   //add comments
   GasContainer container_ = GasContainer(600);
   std::vector<SpeedHistogram> histograms_;

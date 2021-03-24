@@ -3,11 +3,19 @@
 
 namespace idealgas {
 
-SpeedHistogram::SpeedHistogram(std::vector<Particle> particles, const size_t start_point, const ci::Color color) {
+SpeedHistogram::SpeedHistogram(std::vector<Particle> particles, const size_t start_point, const ci::Color& color) {
   particles_ = particles;
   kStartPoint = start_point;
   kColor = color;
 
+}
+
+std::vector<Particle> SpeedHistogram::GetParticle() const {
+  return particles_;
+}
+
+std::vector<float> SpeedHistogram::GetBinHeight() const {
+  return bin_height_;
 }
 
 void SpeedHistogram::Display() const {
@@ -32,8 +40,11 @@ void SpeedHistogram::AdvanceOneFrame() {
           glm::length(particle.GetVelocity()) < (bin_speed * (i + 1))) {
         count++;
       }
+      if (glm::length(particle.GetVelocity()) > max_speed_ && i == kBins - 1) {
+        count++;
+      }
     }
     bin_height_.emplace_back(static_cast<float>(count)/static_cast<float>(particles_.size()));
   }
 }
-}
+} //namespace idealgas

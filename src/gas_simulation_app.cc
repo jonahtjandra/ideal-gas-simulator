@@ -8,7 +8,7 @@ IdealGasApp::IdealGasApp() {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
   container_.AddParticles(30, 3, 4, 1, ci::Color(particle_color_1));
   container_.AddParticles(30, 2, 6, 3, ci::Color(particle_color_2));
-  container_.AddParticles(30, 1, 9, 5, ci::Color(particle_color_3));
+  container_.AddParticles(30, 1, 8, 5, ci::Color(particle_color_3));
 }
 
 void IdealGasApp::CreateHistogram(const GasContainer container) {
@@ -55,8 +55,8 @@ void IdealGasApp::update() {
   for (int i = 0; i < IdealGasApp::simulation_speed_; i++) {
     histograms_.clear();
     container_.AdvanceOneFrame();
-    CreateHistogram(container_);
     for (SpeedHistogram& histogram : histograms_) {
+      CreateHistogram(container_);
       histogram.AdvanceOneFrame();
     }
   }
