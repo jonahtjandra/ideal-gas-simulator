@@ -4,6 +4,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "gas_container.h"
+#include "speed_histogram.h"
 
 namespace idealgas {
 
@@ -31,12 +32,24 @@ class IdealGasApp : public ci::app::App {
   void keyDown(cinder::app::KeyEvent event) override;
 
   // provided that you can see the entire UI on your screen.
-  const int kWindowSize = 610;
+  const int kWindowSize = 750;
 
  private:
-  GasContainer container_ = GasContainer(100, 1, 6, ci::Color("green"),600);
+  /**
+   * Private helper method used to instantiate a histogram from the given container
+   * @param container_ the container object of the simulation
+   */
+  void CreateHistogram(const GasContainer container);
+  //add comments
+  GasContainer container_ = GasContainer(600);
+  std::vector<SpeedHistogram> histograms_;
   //set speed of simulation
   int simulation_speed_ = 1;
+  ci::Color particle_color_1 = ci::Color("white");
+  ci::Color particle_color_2 = ci::Color("orange");
+  ci::Color particle_color_3 = ci::Color("blue");
+  const size_t kHistogramStartingPoint = 130;
+  const size_t kHistogramSpacing = 200;
 };
 
 }  // namespace idealgas
